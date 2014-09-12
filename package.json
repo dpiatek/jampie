@@ -5,6 +5,10 @@
   "scripts": {
     "test": "karma start"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dpiatek/jamscript"
+  },
   "author": "Dominik Piatek",
   "license": "MIT",
   "devDependencies": {
