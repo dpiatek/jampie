@@ -9,12 +9,10 @@
   "license": "MIT",
   "devDependencies": {
     "broccoli": "~0.12.3",
+    "broccoli-concat": "0.0.11",
+    "broccoli-traceur": "~0.9.0",
+    "karma": "~0.12.23",
     "karma-jasmine": "~0.1.5",
     "karma-phantomjs-launcher": "~0.1.4"
-  },
-  "dependencies": {
-    "broccoli-traceur": "~0.9.0",
-    "broccoli-concat": "0.0.11",
-    "karma": "~0.12.23"
   }
 }
