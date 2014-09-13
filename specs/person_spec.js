@@ -18,7 +18,7 @@ describe("Person", function() {
 
   it("gets the persons profile from the api", function() {
     var spy = sinon.spy();
-    var person = jamscript.getPerson("TeamJamPicks");
+    var person = jampie.getPerson("TeamJamPicks");
 
     person.then(spy);
 

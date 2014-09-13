@@ -1,5 +1,5 @@
 {
-  "name": "jamscript",
+  "name": "jampie",
   "version": "0.0.0",
   "description": "A javascript API wrapper for This Is My Jam",
   "scripts": {
@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/dpiatek/jamscript"
+    "url": "https://github.com/dpiatek/jampie"
   },
   "author": "Dominik Piatek",
   "license": "MIT",
