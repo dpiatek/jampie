@@ -1,6 +1,8 @@
 describe("Person", function() {
   "use strict";
 
+  var jampie = require("../src/jampie.js");
+
   beforeEach(function() {
     var requests;
 
