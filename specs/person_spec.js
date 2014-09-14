@@ -11,20 +11,21 @@ describe("Person", function() {
   afterEach(() => server.restore());
 
   describe("Overview", function() {
-    var person, api = apiDoc.person.overview;
+    var person, overview = apiDoc.person.overview;
 
     beforeEach(function() {
-      server.respondWith(api.response);
+      server.respondWith(overview.response);
       person = jampie.getPerson("jamoftheday");
     });
 
     it("hits the correct url", function() {
-      expect(server.requests[0].url).toEqual(api.url);
+      expect(server.requests[0].url).toEqual(overview.url);
     });
 
     it("gets the persons profile", function(done) {
       person.then(function(data) {
-        expect(data).toEqual(JSON.parse(api.response));
+        var parsedData = JSON.parse(overview.response);
+        expect(data.person).toEqual(parsedData.person);
         done();
       });
       server.respond();
@@ -32,21 +33,32 @@ describe("Person", function() {
   });
 
   describe("Likes", function() {
-    var api = apiDoc.person.likes;
+    var person;
+    var likes = apiDoc.person.likes;
+
+    beforeEach(function(done) {
+      var overview = apiDoc.person.overview;
+      server.respondWith(overview.response);
+      person = jampie.getPerson("jamoftheday").then(function(res) {
+        person = res;
+        done();
+      });
+      server.respond();
+    });
 
     it("hits the correct url", function() {
-      server.respondWith(api.response);
-      jampie.getPerson("jamoftheday").getLikes();
-      expect(server.requests[1].url).toEqual(api.url);
+      server.respondWith(likes.response);
+      person.getLikes();
+      expect(server.requests[1].url).toEqual(likes.url);
+      server.respond();
     });
 
     it("gets his likes", function(done) {
-      server.respondWith(api.response);
-      jampie
-        .getPerson("jamoftheday")
-        .getLikes()
+      var firstJamsTitle = JSON.parse(likes.response).jams[0].title;
+      server.respondWith(likes.response);
+      person.getLikes()
         .then(function(data) {
-          expect(data).toEqual(JSON.parse(api.response));
+          expect(data.jams[0].title).toEqual(firstJamsTitle);
           done();
         });
       server.respond();

@@ -1,12 +1,16 @@
-var Person = require('./jampie/person');
+const util = require("util");
+const Base = require("./jampie/base");
+const Person = require("./jampie/person");
 
-module.exports = {
-  getPerson: function(name) {
-    var person = new Person(name);
-    person.setApiKey(this.apiKey);
-    return person.get();
-  },
-  setApiKey: function(apiKey) {
-    this.apiKey = apiKey;
-  }
+function Jampie() {
+  Base.call(this);
+}
+
+util.inherits(Jampie, Base);
+
+Jampie.prototype.getPerson = function(name) {
+  var url = this.createUrl(name), key = this.apiKey;
+  return this.fetch({ url: url, fn: Person, key: key, prop: "person" });
 };
+
+module.exports = new Jampie();

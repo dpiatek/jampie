@@ -1,35 +1,36 @@
+const uxhr = require("uxhr");
 const baseUrl = "http://api.thisismyjam.com";
 const version = "1";
 
-var uxhr = require("uxhr");
-var apiKey = null;
-
 function Base() {}
 
-Base.prototype.setApiKey = string => apiKey = string;
+Base.prototype.setApiKey = function(key) {
+  this.apiKey = key;
+};
 
-Base.prototype.constructUrl = function(string) {
+Base.prototype.createUrl = function(string) {
   return [baseUrl, version, string].join("/") + ".json";
 };
 
-Base.prototype.makeRequest = function(url) {
-  var keyParam = apiKey ? { key: apiKey } : {};
+Base.prototype.fetch = function(options) {
+  var keyParam = options.key ? { key: options.key } : {};
 
-  return new Promise(function(resolve, reject) {
-    uxhr(url, keyParam, {
-      success: function(data) {
-        try {
-          data = JSON.parse(data);
-          resolve(data);
-        } catch(err) {
-          reject(err);
-        }
-      },
-      error: function(err) {
-        reject(err);
-      }
+  var promise = new Promise(function(resolve, reject) {
+    uxhr(options.url, keyParam, {
+      success: data => resolve(data),
+      error: err => reject(err)
     });
   });
+
+  return promise
+    .then(JSON.parse)
+    .then(function(result) {
+      var Fn = options.fn;
+
+      if (keyParam) result.apiKey = options.key;
+
+      return Fn ? new Fn(result) : result;
+    });
 };
 
 module.exports = Base;
