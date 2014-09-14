@@ -1,30 +1,29 @@
 describe("Person", function() {
   "use strict";
 
+  const personOverviewUrl = "http://api.thisismyjam.com/1/jamoftheday?key=myApiKey";
+  const response = JSON.stringify({ "person": { "name": "jamoftheday" } });
+
   var jampie = require("../src/jampie.js");
+  jampie.setApiKey("myApiKey");
 
-  beforeEach(function() {
-    var requests;
+  beforeEach(() => this.server = sinon.fakeServer.create());
+  afterEach(() => this.server.restore());
 
-    this.xhr = sinon.useFakeXMLHttpRequest();
-    requests = this.requests = [];
-
-    this.xhr.onCreate = function(xhr) {
-      requests.push(xhr);
-    };
+  it("hits the correct url", function() {
+    this.server.respondWith(response);
+    jampie.getPerson("jamoftheday");
+    expect(this.server.requests[0].url).toEqual(personOverviewUrl);
   });
 
-  afterEach(function() {
-    this.xhr.restore();
-  });
-
-  it("gets the persons profile from the api", function() {
-    var spy = sinon.spy();
-    var person = jampie.getPerson("TeamJamPicks");
-
-    person.then(spy);
-
-    this.requests[0].respond(200, { "Content-Type": "application/json" }, { "person": { "name": "TeamJamPicks" } });
-    expect(spy).to.be.calledWith({ "person": { "name": "TeamJamPicks" } });
+  it("gets the persons profile from the api", function(done) {
+    this.server.respondWith(response);
+    jampie
+      .getPerson("jamoftheday")
+      .then(function(data) {
+        expect(data).toEqual(JSON.parse(response));
+        done();
+      });
+    this.server.respond();
   });
 });

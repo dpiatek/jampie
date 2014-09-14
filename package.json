@@ -14,11 +14,12 @@
   "devDependencies": {
     "browserify": "^4.0.0",
     "karma": "~0.12.23",
-    "karma-jasmine": "~0.1.5",
+    "karma-jasmine": "^0.2",
     "karma-phantomjs-launcher": "~0.1.4",
     "sinon": "~1.10.3",
     "karma-sinon": "~1.0.3",
     "karma-firefox-launcher": "~0.1.3",
-    "karma-browserify": "~0.2.1"
+    "karma-browserify": "~0.2.1",
+    "uxhr": "~1.0.6"
   }
 }
