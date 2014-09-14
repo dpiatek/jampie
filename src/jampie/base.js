@@ -9,7 +9,7 @@ function Base() {}
 Base.prototype.setApiKey = string => apiKey = string;
 
 Base.prototype.constructUrl = function(string) {
-  return [baseUrl, version, string].join("/");
+  return [baseUrl, version, string].join("/") + ".json";
 };
 
 Base.prototype.makeRequest = function(url) {
