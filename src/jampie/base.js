@@ -13,8 +13,10 @@ Base.prototype.constructUrl = function(string) {
 };
 
 Base.prototype.makeRequest = function(url) {
+  var keyParam = apiKey ? { key: apiKey } : {};
+
   return new Promise(function(resolve, reject) {
-    uxhr(url, { key: apiKey }, {
+    uxhr(url, keyParam, {
       success: function(data) {
         try {
           data = JSON.parse(data);
