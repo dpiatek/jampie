@@ -2,7 +2,7 @@ describe("Person", function() {
   "use strict";
 
   var jampie = require("../src/jampie.js");
-  var apiDoc = require("./api_doc.js");
+  var fixture = require("./fixture.js");
   var server;
 
   jampie.setApiKey("myApiKey");
@@ -11,7 +11,7 @@ describe("Person", function() {
   afterEach(() => server.restore());
 
   describe("Overview", function() {
-    var person, overview = apiDoc.person.overview;
+    var person, overview = fixture.person.overview;
 
     beforeEach(function() {
       server.respondWith(overview.response);
@@ -34,10 +34,10 @@ describe("Person", function() {
 
   describe("Likes", function() {
     var person;
-    var likes = apiDoc.person.likes;
+    var likes = fixture.person.likes;
 
     beforeEach(function(done) {
-      var overview = apiDoc.person.overview;
+      var overview = fixture.person.overview;
       server.respondWith(overview.response);
       person = jampie.getPerson("jamoftheday").then(function(res) {
         person = res;
