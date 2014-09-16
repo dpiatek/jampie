@@ -13,7 +13,7 @@ util.inherits(Person, Base);
 Person.prototype.getLikes = function() {
   var likesPath = [this.person.name, "likes"].join("/");
   var url = this.createUrl(likesPath), key = this.apiKey;
-  return this.fetch({ url: url, key: key, prop: "jams" });
+  return this.fetch({ url: url, key: key });
 };
 
 module.exports = Person;
