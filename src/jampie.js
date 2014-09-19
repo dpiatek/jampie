@@ -11,6 +11,11 @@ util.inherits(Jampie, Base);
 Jampie.prototype.getPerson = function(name) {
   var url = this.createUrl(name), key = this.apiKey;
   return this.fetch({ url: url, fn: Person, key: key });
+
+Jampie.prototype.getLikes = function(name) {
+  var likesPath = [name, "likes"].join("/");
+  var url = this.createUrl(likesPath), key = this.apiKey;
+  return this.fetch({ url: url, key: key });
 };
 
 module.exports = new Jampie();
