@@ -13,24 +13,30 @@ Base.prototype.createUrl = function(string) {
 };
 
 Base.prototype.fetch = function(options) {
-  var keyParam = options.key ? { key: options.key } : {};
+  var key = this.apiKey;
 
   var promise = new Promise(function(resolve, reject) {
-    uxhr(options.url, keyParam, {
+    uxhr(options.url, (key ? { key: key } : {}), {
       success: data => resolve(data),
       error: err => reject(err)
     });
   });
 
+  var decorateResults = function(result) {
+    var Fn = options.fn, instance;
+
+    if (Fn) {
+      instance = new Fn(result);
+      instance.setApiKey(key);
+      return instance;
+    } else {
+      return result;
+    }
+  };
+
   return promise
     .then(JSON.parse)
-    .then(function(result) {
-      var Fn = options.fn;
-
-      if (keyParam) result.apiKey = options.key;
-
-      return Fn ? new Fn(result) : result;
-    });
+    .then(decorateResults);
 };
 
 module.exports = Base;
