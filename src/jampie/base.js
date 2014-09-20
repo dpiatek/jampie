@@ -14,9 +14,10 @@ Base.prototype.createUrl = function(string) {
 
 Base.prototype.fetch = function(options) {
   var key = this.apiKey;
+  var url = this.createUrl(options.url);
 
   var promise = new Promise(function(resolve, reject) {
-    uxhr(options.url, (key ? { key: key } : {}), {
+    uxhr(url, (key ? { key: key } : {}), {
       success: data => resolve(data),
       error: err => reject(err)
     });

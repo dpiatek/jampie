@@ -12,26 +12,22 @@ util.inherits(Person, Base);
 
 Person.prototype.getLikes = function() {
   var likesPath = [this.person.name, "likes"].join("/");
-  var url = this.createUrl(likesPath);
-  return this.fetch.call(this, { url: url });
+  return this.fetch.call(this, { url: likesPath });
 };
 
 Person.prototype.getJams = function() {
   var jamsPath = [this.person.name, "jams"].join("/");
-  var url = this.createUrl(jamsPath);
-  return this.fetch.call(this, { url: url });
+  return this.fetch.call(this, { url: jamsPath });
 };
 
 Person.prototype.getFollowing = function() {
-  var jamsPath = [this.person.name, "following"].join("/");
-  var url = this.createUrl(jamsPath);
-  return this.fetch.call(this, { url: url });
+  var followingPath = [this.person.name, "following"].join("/");
+  return this.fetch.call(this, { url: followingPath });
 };
 
 Person.prototype.getFollowers = function() {
-  var jamsPath = [this.person.name, "followers"].join("/");
-  var url = this.createUrl(jamsPath);
-  return this.fetch.call(this, { url: url });
+  var followersPath = [this.person.name, "followers"].join("/");
+  return this.fetch.call(this, { url: followersPath });
 };
 
 module.exports = Person;

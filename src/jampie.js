@@ -9,14 +9,12 @@ function Jampie() {
 util.inherits(Jampie, Base);
 
 Jampie.prototype.getPerson = function(name) {
-  var url = this.createUrl(name);
-  return this.fetch.call(this, { url: url, fn: Person });
+  return this.fetch.call(this, { url: name, fn: Person });
 };
 
 Jampie.prototype.getLikes = function(name) {
   var likesPath = [name, "likes"].join("/");
-  var url = this.createUrl(likesPath);
-  return this.fetch.call(this, { url: url });
+  return this.fetch.call(this, { url: likesPath });
 };
 
 module.exports = new Jampie();
