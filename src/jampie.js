@@ -12,9 +12,9 @@ Jampie.prototype.getPerson = function(name) {
   return this.fetch.call(this, { url: name, fn: Person });
 };
 
-Jampie.prototype.getLikes = function(name) {
+Jampie.prototype.getLikes = function(name, params) {
   var likesPath = [name, "likes"].join("/");
-  return this.fetch.call(this, { url: likesPath });
+  return this.fetch.call(this, { url: likesPath, params: params });
 };
 
 module.exports = new Jampie();

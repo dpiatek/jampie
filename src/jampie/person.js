@@ -17,13 +17,13 @@ Person.prototype.createPath = function createPath(string) {
   return [this.person.name, string].join("/");
 };
 
-Person.prototype.fetchWrapper = function(endpoint) {
-  return this.fetch.call(this, { url: this.createPath(endpoint) });
+Person.prototype.fetchWrapper = function(endpoint, params) {
+  return this.fetch.call(this, { url: this.createPath(endpoint), params: params });
 };
 
 endpoints.forEach(function(endpoint) {
-  Person.prototype["get" + endpoint] = function() {
-    return this.fetchWrapper(endpoint.toLowerCase());
+  Person.prototype["get" + endpoint] = function(params) {
+    return this.fetchWrapper(endpoint.toLowerCase(), params);
   };
 });
 

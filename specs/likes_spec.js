@@ -21,6 +21,16 @@ describe("Likes", function() {
     server.respond();
   });
 
+  it("appends correct params", function(done) {
+    server.respondWith(fixtureLikes.response);
+    likes = jampie.getLikes("jamoftheday", { show: "current" }).then(function(res) {
+      likes = res;
+      done();
+    });
+    expect(server.requests[0].url).toMatch(/show=current/);
+    server.respond();
+  });
+
   it("gets his likes", function(done) {
     var firstJamsTitle = JSON.parse(fixtureLikes.response).jams[0].title;
     server.respondWith(fixtureLikes.response);
