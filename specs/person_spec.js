@@ -64,4 +64,37 @@ describe("Person", function() {
       server.respond();
     });
   });
+
+  describe("Jams", function() {
+    var person;
+    var jams = fixture.person.jams;
+
+    beforeEach(function(done) {
+      var overview = fixture.person.overview;
+      server.respondWith(overview.response);
+      person = jampie.getPerson("jamoftheday").then(function(res) {
+        person = res;
+        done();
+      });
+      server.respond();
+    });
+
+    it("hits the correct url", function() {
+      server.respondWith(jams.response);
+      person.getJams();
+      expect(server.requests[1].url).toEqual(jams.url);
+      server.respond();
+    });
+
+    it("gets his jams", function(done) {
+      var firstJamsArtist = JSON.parse(jams.response).jams[0].artist;
+      server.respondWith(jams.response);
+      person.getJams()
+        .then(function(data) {
+          expect(data.jams[0].artist).toEqual(firstJamsArtist);
+          done();
+        });
+      server.respond();
+    });
+  });
 });

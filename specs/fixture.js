@@ -8,6 +8,10 @@ module.exports = {
     likes: {
       url: "http://api.thisismyjam.com/1/jamoftheday/likes.json?key=myApiKey",
       response: JSON.stringify({ "jams": [{ "title": "Snakehips" }]})
+    },
+    jams: {
+      url: "http://api.thisismyjam.com/1/jamoftheday/jams.json?key=myApiKey",
+      response: JSON.stringify({ "jams": [{ "artist": "Mapaga" }] })
     }
   }
 };
