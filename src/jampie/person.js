@@ -16,4 +16,10 @@ Person.prototype.getLikes = function() {
   return this.fetch.call(this, { url: url });
 };
 
+Person.prototype.getJams = function() {
+  var jamsPath = [this.person.name, "jams"].join("/");
+  var url = this.createUrl(jamsPath);
+  return this.fetch.call(this, { url: url });
+};
+
 module.exports = Person;
