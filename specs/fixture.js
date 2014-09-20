@@ -12,6 +12,14 @@ module.exports = {
     jams: {
       url: "http://api.thisismyjam.com/1/jamoftheday/jams.json?key=myApiKey",
       response: JSON.stringify({ "jams": [{ "artist": "Mapaga" }] })
+    },
+    following: {
+      url: "http://api.thisismyjam.com/1/jamoftheday/following.json?key=myApiKey",
+      response: JSON.stringify({ "people": [{ "fullname": "Andreas Jansson" }] })
+    },
+    followers: {
+      url: "http://api.thisismyjam.com/1/jamoftheday/followers.json?key=myApiKey",
+      response: JSON.stringify({ "people": [{ "fullname": "Loredana B." }] })
     }
   }
 };

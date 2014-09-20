@@ -22,4 +22,16 @@ Person.prototype.getJams = function() {
   return this.fetch.call(this, { url: url });
 };
 
+Person.prototype.getFollowing = function() {
+  var jamsPath = [this.person.name, "following"].join("/");
+  var url = this.createUrl(jamsPath);
+  return this.fetch.call(this, { url: url });
+};
+
+Person.prototype.getFollowers = function() {
+  var jamsPath = [this.person.name, "followers"].join("/");
+  var url = this.createUrl(jamsPath);
+  return this.fetch.call(this, { url: url });
+};
+
 module.exports = Person;

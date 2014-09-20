@@ -97,4 +97,70 @@ describe("Person", function() {
       server.respond();
     });
   });
+
+  describe("Following", function() {
+    var person;
+    var following = fixture.person.following;
+
+    beforeEach(function(done) {
+      var overview = fixture.person.overview;
+      server.respondWith(overview.response);
+      person = jampie.getPerson("jamoftheday").then(function(res) {
+        person = res;
+        done();
+      });
+      server.respond();
+    });
+
+    it("hits the correct url", function() {
+      server.respondWith(following.response);
+      person.getFollowing();
+      expect(server.requests[1].url).toEqual(following.url);
+      server.respond();
+    });
+
+    it("gets people he follows", function(done) {
+      var firstFollowed = JSON.parse(following.response).people[0].fullname;
+      server.respondWith(following.response);
+      person.getFollowing()
+        .then(function(data) {
+          expect(data.people[0].fullname).toEqual(firstFollowed);
+          done();
+        });
+      server.respond();
+    });
+  });
+
+  describe("Followers", function() {
+    var person;
+    var followers = fixture.person.followers;
+
+    beforeEach(function(done) {
+      var overview = fixture.person.overview;
+      server.respondWith(overview.response);
+      person = jampie.getPerson("jamoftheday").then(function(res) {
+        person = res;
+        done();
+      });
+      server.respond();
+    });
+
+    it("hits the correct url", function() {
+      server.respondWith(followers.response);
+      person.getFollowers();
+      expect(server.requests[1].url).toEqual(followers.url);
+      server.respond();
+    });
+
+    it("gets his likes", function(done) {
+      var firstFollower = JSON.parse(followers.response).people[0].fullname;
+      server.respondWith(followers.response);
+      person.getFollowers()
+        .then(function(data) {
+          expect(data.people[0].fullname).toEqual(firstFollower);
+          done();
+        });
+      server.respond();
+    });
+  });
 });
