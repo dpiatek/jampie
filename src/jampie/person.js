@@ -10,24 +10,24 @@ function Person(data) {
 
 util.inherits(Person, Base);
 
+Person.prototype.createPath = function createPath(string) {
+  return [this.person.name, string].join("/");
+};
+
 Person.prototype.getLikes = function() {
-  var likesPath = [this.person.name, "likes"].join("/");
-  return this.fetch.call(this, { url: likesPath });
+  return this.fetch.call(this, { url: this.createPath("likes") });
 };
 
 Person.prototype.getJams = function() {
-  var jamsPath = [this.person.name, "jams"].join("/");
-  return this.fetch.call(this, { url: jamsPath });
+  return this.fetch.call(this, { url: this.createPath("jams") });
 };
 
 Person.prototype.getFollowing = function() {
-  var followingPath = [this.person.name, "following"].join("/");
-  return this.fetch.call(this, { url: followingPath });
+  return this.fetch.call(this, { url: this.createPath("following") });
 };
 
 Person.prototype.getFollowers = function() {
-  var followersPath = [this.person.name, "followers"].join("/");
-  return this.fetch.call(this, { url: followersPath });
+  return this.fetch.call(this, { url: this.createPath("followers") });
 };
 
 module.exports = Person;
