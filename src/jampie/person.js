@@ -1,8 +1,5 @@
 const util = require("util");
 const Base = require("./base");
-const endpoints = [
-  "Likes", "Jams", "Following", "Followers"
-];
 
 function Person(data) {
   for (var prop in data) {
@@ -21,7 +18,7 @@ Person.prototype.fetchWrapper = function(endpoint, params) {
   return this.fetch.call(this, { url: this.createPath(endpoint), params: params });
 };
 
-endpoints.forEach(function(endpoint) {
+Base.endpoints.forEach(function(endpoint) {
   Person.prototype["get" + endpoint] = function(params) {
     return this.fetchWrapper(endpoint.toLowerCase(), params);
   };

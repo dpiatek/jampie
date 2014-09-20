@@ -1,8 +1,13 @@
 const uxhr = require("uxhr");
 const baseUrl = "http://api.thisismyjam.com";
 const version = "1";
+const endpoints = ["Likes", "Jams", "Following", "Followers"];
 
 function Base() {}
+
+Base.endpoints = endpoints;
+Base.baseUrl = baseUrl;
+Base.version = version;
 
 Base.prototype.setApiKey = function(key) {
   this.apiKey = key;
