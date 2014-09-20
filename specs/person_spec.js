@@ -55,6 +55,13 @@ describe("Person", function() {
         server.respond();
       });
 
+      it("appends correct params", function() {
+        server.respondWith(likes.response);
+        person.getLikes({ show: "current" });
+        expect(server.requests[1].url).toMatch(/show=current/);
+        server.respond();
+      });
+
       it("gets his likes", function(done) {
         var firstJamsTitle = JSON.parse(likes.response).jams[0].title;
         server.respondWith(likes.response);
