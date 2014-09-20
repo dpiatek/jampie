@@ -17,7 +17,7 @@ Base.prototype.fetch = function(options) {
   var url = this.createUrl(options.url);
   var params = options.params || {};
 
-  params.key = key;
+  if (key) params.key = key;
 
   var promise = new Promise(function(resolve, reject) {
     uxhr(url, params, {
