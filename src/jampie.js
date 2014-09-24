@@ -13,7 +13,7 @@ Jampie.prototype.getPerson = function(name) {
 };
 
 Base.endpoints.forEach(function(endpoint) {
-  Jampie.prototype["get" + endpoint] = function(name, params) {
+  Jampie.prototype["get" + endpoint + "For"] = function(name, params) {
     return this.fetch.call(this, { url: [name, endpoint.toLowerCase()].join("/"), params: params });
   };
 });

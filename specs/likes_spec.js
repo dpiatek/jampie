@@ -13,7 +13,7 @@ describe("Likes", function() {
 
   it("hits the correct url", function(done) {
     server.respondWith(fixtureLikes.response);
-    likes = jampie.getLikes("jamoftheday").then(function(res) {
+    likes = jampie.getLikesFor("jamoftheday").then(function(res) {
       likes = res;
       done();
     });
@@ -23,7 +23,7 @@ describe("Likes", function() {
 
   it("appends correct params", function(done) {
     server.respondWith(fixtureLikes.response);
-    likes = jampie.getLikes("jamoftheday", { show: "current" }).then(function(res) {
+    likes = jampie.getLikesFor("jamoftheday", { show: "current" }).then(function(res) {
       likes = res;
       done();
     });
@@ -34,7 +34,7 @@ describe("Likes", function() {
   it("gets his likes", function(done) {
     var firstJamsTitle = JSON.parse(fixtureLikes.response).jams[0].title;
     server.respondWith(fixtureLikes.response);
-    likes = jampie.getLikes("jamoftheday").then(function(res) {
+    likes = jampie.getLikesFor("jamoftheday").then(function(res) {
         expect(res.jams[0].title).toEqual(firstJamsTitle);
         done();
       });
