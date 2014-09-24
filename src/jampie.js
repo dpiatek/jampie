@@ -1,6 +1,6 @@
-const util = require("util");
-const Base = require("./jampie/base");
-const Person = require("./jampie/person");
+var util = require("util");
+var Base = require("./jampie/base");
+var Person = require("./jampie/person");
 
 function Jampie() {
   Base.call(this);

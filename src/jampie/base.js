@@ -1,7 +1,7 @@
-const uxhr = require("uxhr");
-const baseUrl = "http://api.thisismyjam.com";
-const version = "1";
-const endpoints = ["Likes", "Jams", "Following", "Followers"];
+var uxhr = require("uxhr");
+var baseUrl = "http://api.thisismyjam.com";
+var version = "1";
+var endpoints = ["Likes", "Jams", "Following", "Followers"];
 
 function Base() {}
 
@@ -26,8 +26,12 @@ Base.prototype.fetch = function(options) {
 
   var promise = new Promise(function(resolve, reject) {
     uxhr(url, params, {
-      success: data => resolve(data),
-      error: err => reject(err)
+      success: function(data) {
+        resolve(data);
+      },
+      error: function(err) {
+        reject(err);
+      }
     });
   });
 

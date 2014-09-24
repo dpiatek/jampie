@@ -1,5 +1,5 @@
-const util = require("util");
-const Base = require("./base");
+var util = require("util");
+var Base = require("./base");
 
 function Person(data) {
   for (var prop in data) {
