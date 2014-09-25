@@ -8,7 +8,7 @@ Jampie was built with browserify which means it is wrapped in a CommonJS module:
 ```
 var jampie = require('path/to/jampie.js');
 ```
-However, there is a file in `/dist` called `jampie.global.js` which lets you jampie as a global.
+However, there is a file in `/dist` called `jampie.global.js` which lets you use jampie as a global.
 
 ## Usage
 
